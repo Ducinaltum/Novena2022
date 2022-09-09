@@ -17,10 +17,8 @@
   </div>
   <!--FLIPBOOK-->
   <script type="">
-    // Browser
-    console.log(document.documentElement.clientHeight);
-    console.log(window.innerHeight);
-    let  magazines = {
+    let  magazines = 
+    {
       "15":
       {
         size: 
@@ -29,22 +27,107 @@
           height: 4678
         },
         numberOfPages: 5
+      },
+      "16":
+      {
+        size: 
+        {
+          width: 3307, 
+          height: 4678
+        },
+        numberOfPages: 8
+      },
+      "17":
+      {
+        size: 
+        {
+          width: 3307, 
+          height: 4678
+        },
+        numberOfPages: 5
+      },
+      "18":
+      {
+        size: 
+        {
+          width: 3307, 
+          height: 4678
+        },
+        numberOfPages: 4
+      },
+      "19":
+      {
+        size: 
+        {
+          width: 3307, 
+          height: 4678
+        },
+        numberOfPages: 5
+      },
+      "20":
+      {
+        size: 
+        {
+          width: 3307, 
+          height: 4678
+        },
+        numberOfPages: 6
+      },
+      "21":
+      {
+        size: 
+        {
+          width: 3307, 
+          height: 4678
+        },
+        numberOfPages: 4
+      },
+      "22":
+      {
+        size: 
+        {
+          width: 3307, 
+          height: 4678
+        },
+        numberOfPages: 5
+      },
+      "23":
+      {
+        size: 
+        {
+          width: 3307, 
+          height: 4678
+        },
+        numberOfPages: 4
+      },
+      "24":
+      {
+        size: 
+        {
+          width: 3307, 
+          height: 4678
+        },
+        numberOfPages: 6
       }
     }
+    LoadMagazine();
 
-    let today = new Date()
-    let month = today.getMonth() + 1
-    let day = today.getDate();
-    day = 15;
-    console.log(month);
-    console.log(day);
-    let magazine = magazines[day];
-    console.log(magazine);
-    var pageWidth = 595;
-    var pageHeight = 841;
-    var ratio = pageWidth / pageHeight;
-    const pageFlip = new St.PageFlip(
-    document.getElementById("example"),
+    function LoadMagazine(){
+      let today = new Date()
+      let month = today.getMonth() + 1;
+      let day = today.getDate();
+      if(month != 9) return;
+      if(!magazines[day]) return;
+      let magazine = magazines[day];
+      //var pageWidth = 595;
+      //var pageHeight = 841;
+      let pageWidth = magazine.size.width;
+      let pageHeight = magazine.size.height;
+      let ratio = pageWidth / pageHeight;
+      let wHeight = window.innerHeight * 0.95;
+      let wMaxWidth = wHeight * ratio;
+      const pageFlip = new St.PageFlip(
+      document.getElementById("example"),
       {
           // start page index
           startPage: 0,
@@ -54,9 +137,9 @@
           height: pageHeight,
           // min/max width & height
           minWidth: 0,
-          maxWidth: window.innerHeight * ratio,
+          maxWidth: wMaxWidth,
           minHeight: 0,
-          maxHeight: pageHeight,
+          maxHeight: wHeight,
           // draw book shadows
           drawShadow: true,
           // animation speed
@@ -75,20 +158,10 @@
           mobileScrollSupport: true
       }
     );
-    pageFlip.loadFromImages(['0.jpg', 
-                            '1.jpg',
-                            '2.jpg',
-                            '3.jpg',
-                            '4.jpg',
-                            '5.jpg',
-                            '6.jpg',
-                            '7.jpg',
-                            '8.jpg',
-                            '9.jpg',
-                            '10.jpg',
-                            '11.jpg',
-                            '12.jpg',
-                          ]);
+    let pages = [];
+    for(let i = 0; i < magazine.numberOfPages; i++) pages.push(`/${day}/${i+1}.png`);
+    pageFlip.loadFromImages(pages);
+    }
   </script>
 </body>
 
