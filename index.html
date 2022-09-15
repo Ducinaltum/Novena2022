@@ -159,7 +159,7 @@
       }
     );
     let pages = [];
-    for(let i = 0; i < magazine.numberOfPages; i++) pages.push(`/${day}/${i+1}.png`);
+    for(let i = 0; i < magazine.numberOfPages; i++) pages.push(`${day}/${i+1}.png`);
     pageFlip.loadFromImages(pages);
     }
   </script>
